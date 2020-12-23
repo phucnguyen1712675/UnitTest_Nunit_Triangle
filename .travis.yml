@@ -1,0 +1,9 @@
+language: csharp
+solution: UnitTest_Nunit_Triangle.sln
+install:
+– nuget restore UnitTest_Nunit_Triangle.sln
+– nuget install NUnit.Runners -Version 3.11.1 -OutputDirectory testrunner
+script:
+– xbuild /p:Configuration=Release UnitTest_Nunit_Triangle.sln
+– mono ./testrunner/NUnit.Runners.3.11.1/tools/nunit-console.exe           
+./UnitTest_Nunit_Triangle.Test/bin/Release/UnitTest_Nunit_Triangle.Test.dll
