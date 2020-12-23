@@ -2,8 +2,7 @@ language: csharp
 solution: UnitTest_Nunit_Triangle.sln
 install:
 – nuget restore UnitTest_Nunit_Triangle.sln
-– nuget install NUnit.Runners -Version 3.11.1 -OutputDirectory testrunner
+- nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
-– xbuild /p:Configuration=Release UnitTest_Nunit_Triangle.sln
-– mono ./testrunner/NUnit.Runners.3.11.1/tools/nunit-console.exe           
-./UnitTest_Nunit_Triangle.Test/bin/Release/UnitTest_Nunit_Triangle.Test.dll
+- msbuild /p:Configuration=Release UnitTest_Nunit_Triangle.sln
+- mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./UnitTest_Nunit_Triangle.Test/bin/Release/MyProject.Tests.dll
