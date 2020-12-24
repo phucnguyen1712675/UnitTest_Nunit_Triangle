@@ -58,20 +58,18 @@ namespace UnitTest_Nunit_Triangle.Test
                 new object[] { 0m, 0m, 0m, 0m, 0m, 0m, 0m }
             };
 
+
         //__________Test for Expected Results__________  
 
-        // Test Case #1:
         [Test]
         public void IsInstance()
             => Assert.IsInstanceOf(typeof(TamGiac), _tamgiac);
 
-        // Test Case #2 - #7:
         [Test]
         [TestCaseSource(nameof(Data1))]
         public void CheckTriangleType_ReturnsExpectedResult(string expectedResult, decimal x1, decimal y1, decimal x2, decimal y2, decimal x3, decimal y3)
             => Assert.AreEqual(expectedResult, _tamgiac.CheckTriangleType(x1, y1, x2, y2, x3, y3));
 
-        // Test Case #8 - #10:
         [Test]
         [TestCaseSource(nameof(Data2))]
         public void CheckPerimeter_ReturnExpectedResult(decimal expectedResult, decimal x1, decimal y1, decimal x2, decimal y2, decimal x3, decimal y3)
@@ -79,13 +77,11 @@ namespace UnitTest_Nunit_Triangle.Test
 
         //__________Test for Actual Results__________  
 
-        // Test Case #11 - #16:
         [Test]
         [TestCaseSource(nameof(Data3))]
         public void CheckTriangleType_ReturnsActualResult(string expectedResult, decimal x1, decimal y1, decimal x2, decimal y2, decimal x3, decimal y3)
             => Assert.AreNotEqual(expectedResult, _tamgiac.CheckTriangleType(x1, y1, x2, y2, x3, y3));
 
-        // Test Case #17 - #18:
         [Test]
         [TestCaseSource(nameof(Data4))]
         public void CheckPerimeter_ReturnActualResult(decimal expectedResult, decimal x1, decimal y1, decimal x2, decimal y2, decimal x3, decimal y3)

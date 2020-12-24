@@ -1,2 +1,10 @@
 language: csharp
 solution: UnitTest_Nunit_Triangle.sln
+
+install:
+  - sudo apt-get install nunit-console
+  - nuget restore UnitTest_Nunit_Triangle.sln
+
+script:
+  - xbuild UnitTest_Nunit_Triangle.sln
+  - nunit-console UnitTest_Nunit_Triangle.Test/bin/Debug/UnitTest_Nunit_Triangle.Test.dll
