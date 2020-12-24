@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DecimalMath;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,13 +10,13 @@ namespace UnitTest_Nunit_Triangle
 {
     public class TamGiac
     {
-        private const double DELTA = 0.00001;
+        public const decimal DELTA = 0.000001m;
 
         private Diem _diem1;
         private Diem _diem2;
         private Diem _diem3;
 
-        private void SetNewValue(double x1, double x2, double y1, double y2, double z1, double z2)
+        private void SetNewValue(decimal x1, decimal x2, decimal y1, decimal y2, decimal z1, decimal z2)
         {
             this._diem1 = new Diem
             {
@@ -34,13 +35,13 @@ namespace UnitTest_Nunit_Triangle
             };
         }
 
-        private double GetDistance(Diem x, Diem y) => Math.Sqrt((Math.Pow(x.GetX() - y.GetX(), 2) + Math.Pow(x.GetY() - y.GetY(), 2)));
+        private decimal GetDistance(Diem x, Diem y) => DecimalEx.Sqrt(DecimalEx.Pow(x.GetX() - y.GetX(), 2m) + DecimalEx.Pow(x.GetY() - y.GetY(), 2m));
 
-        private double GetSide12Length() => GetDistance(this._diem1, this._diem2);
+        private decimal GetSide12Length() => GetDistance(this._diem1, this._diem2);
 
-        private double GetSide23Length() => GetDistance(this._diem2, this._diem3);
+        private decimal GetSide23Length() => GetDistance(this._diem2, this._diem3);
 
-        private double GetSide31Length() => GetDistance(this._diem3, this._diem1);
+        private decimal GetSide31Length() => GetDistance(this._diem3, this._diem1);
 
         private bool IsValidTriangle()
         {
@@ -50,7 +51,7 @@ namespace UnitTest_Nunit_Triangle
             return result != 0;
         }
 
-        private bool IsEqualLength(double numA, double numB) => Math.Abs(numA - numB) < DELTA;
+        private bool IsEqualLength(decimal numA, decimal numB) => Decimal.Compare(numA, numB) == 0 || Math.Abs(numA - numB) < DELTA;
 
         private bool IsEquilateralTriangle() => IsEqualLength(GetSide12Length(), GetSide23Length()) && IsEqualLength(GetSide23Length(), GetSide31Length());
 
@@ -58,11 +59,11 @@ namespace UnitTest_Nunit_Triangle
                                             IsEqualLength(GetSide23Length(), GetSide31Length()) || 
                                             IsEqualLength(GetSide31Length(), GetSide12Length());
         
-        private bool IsRightAngledTriangle() => IsEqualLength(Math.Pow(GetSide12Length(), 2) + Math.Pow(GetSide23Length(), 2), Math.Pow(GetSide31Length(), 2)) ||
-                                              IsEqualLength(Math.Pow(GetSide23Length(), 2) + Math.Pow(GetSide31Length(), 2), Math.Pow(GetSide12Length(), 2)) ||
-                                              IsEqualLength(Math.Pow(GetSide31Length(), 2) + Math.Pow(GetSide12Length(), 2), Math.Pow(GetSide23Length(), 2));
+        private bool IsRightAngledTriangle() => IsEqualLength(DecimalEx.Pow(GetSide12Length(), 2m) + DecimalEx.Pow(GetSide23Length(), 2m), DecimalEx.Pow(GetSide31Length(), 2m)) ||
+                                              IsEqualLength(DecimalEx.Pow(GetSide23Length(), 2m) + DecimalEx.Pow(GetSide31Length(), 2m), DecimalEx.Pow(GetSide12Length(), 2m)) ||
+                                              IsEqualLength(DecimalEx.Pow(GetSide31Length(), 2m) + DecimalEx.Pow(GetSide12Length(), 2m), DecimalEx.Pow(GetSide23Length(), 2m));
 
-        public double FindPerimeter(double x1, double x2, double y1, double y2, double z1, double z2)
+        public decimal FindPerimeter(decimal x1, decimal x2, decimal y1, decimal y2, decimal z1, decimal z2)
         {
             SetNewValue(x1, x2, y1, y2, z1, z2);
 
@@ -70,10 +71,10 @@ namespace UnitTest_Nunit_Triangle
                 GetSide12Length() +
                 GetSide23Length() +
                 GetSide31Length()
-                : -1.0;
+                : -1.0m;
         }
 
-        public string CheckTriangleType(double x1, double x2, double y1, double y2, double z1, double z2)
+        public string CheckTriangleType(decimal x1, decimal x2, decimal y1, decimal y2, decimal z1, decimal z2)
         {
             SetNewValue(x1, x2, y1, y2, z1, z2);
 
