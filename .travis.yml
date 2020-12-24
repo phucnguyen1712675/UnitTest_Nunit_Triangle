@@ -2,9 +2,9 @@ language: csharp
 solution: UnitTest_Nunit_Triangle.sln
 
 install:
-  - sudo apt-get install nunit-console
   - nuget restore UnitTest_Nunit_Triangle.sln
+  - nuget install NUnit.Runners -OutputDirectory testrunner
 
 script:
   - xbuild UnitTest_Nunit_Triangle.sln
-  - nunit-console ./UnitTest_Nunit_Triangle.Test/bin/Release/UnitTest_Nunit_Triangle.Test.dll
+  – mono ./testrunner/NUnit.ConsoleRunners.3.11.1/tools/nunit3-console.exe ./UnitTest_Nunit_Triangle.Test/bin/Release/UnitTest_Nunit_Triangle.Test.dll
