@@ -7,4 +7,4 @@ install:
 
 script:
   - xbuild UnitTest_Nunit_Triangle.sln
-  - nunit-console UnitTest_Nunit_Triangle.Test/bin/Debug/UnitTest_Nunit_Triangle.Test.dll
+  - nunit-console ./UnitTest_Nunit_Triangle.Test/bin/Release/UnitTest_Nunit_Triangle.Test.dll
